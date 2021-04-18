@@ -71,7 +71,7 @@ class NAM(Model):
       logits = self.linear(dropout_out) + self._bias
       # logits *= torch.repeat_interleave(weights,
       #                                   logits.shape[-1]).view(logits.shape)
-      preds = F.softmax(logits, dim=-1)
+      preds = F.sigmoid(logits, dim=-1)
       return preds, dropout_out
 
     out = torch.sum(dropout_out, dim=-1)
